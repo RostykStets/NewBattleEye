@@ -38,28 +38,20 @@ public class BusinessLogic {
         int result;
         Cursor cursor = db.rawQuery("SELECT * FROM Users WHERE email = ? AND password = ?", new String[] {email, password});
         if(cursor.getCount() > 0) {
-            //cursor.close();
-            //return 0;
             result = 0;
         }
         else
         {
             cursor = db.rawQuery("SELECT * FROM Users WHERE email = ?", new String[] {email});
             if (cursor.getCount() > 0) {
-                //cursor.close();
-                //return 1;
                 result = 1;
             }
             else {
                 cursor = db.rawQuery("SELECT * FROM Users WHERE password = ?", new String[] {password});
                 if(cursor.getCount() > 0) {
-                    //cursor.close();
-                    //return 2;
                     result = 2;
                 }
                 else {
-                    //cursor.close();
-                    //return 3;
                     result = 3;
                 }
             }

@@ -1,0 +1,19 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Cursova</string>
+    <string name="loginLabel">Авторизуватись</string>
+    <string name="login_hint">Логін</string>
+    <string name="password_hint">Пароль</string>
+    <string name="confirmPassword_hint">Введіть пароль ще раз</string>
+    <string name="RememberMe">Remember Me</string>
+    <string name="signUpLabel">Зареєструватись</string>
+    <string name="loginButton">Увійти</string>
+    <string name="signUpButton">Створити акаунт</string>
+    <string name="signUpLink">Створити акаунт</string>
+    <string name="loginLink">Я уже маю акаунт</string>
+    <string name="usersLabel">Облікові записи</string>
+    <string name="openCamera">Відкрити камеру</string>
+    <string name="logOut">Вийти</string>
+    <string name="deleteAccount">Видалити акаунт</string>
+    <string name="user">Користувач</string>
+    <string name="editProfile">Редагувати профіль</string>
+</resources>

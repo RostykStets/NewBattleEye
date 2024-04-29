@@ -1,4 +1,4 @@
-package com.example.cursova;
+package com.example.cursova.PresentationLayer.Adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,10 +9,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cursova.BusinessLogicLayer.BusinessLogic;
+import com.example.cursova.R;
+
 import java.util.ArrayList;
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder>{
-    private Context context;
-    private ArrayList<String> user_emails;
+    private final Context context;
+    private final ArrayList<String> user_emails;
 
     public MyAdapter(ArrayList<String> user_emails, Context context)
     {

@@ -18,16 +18,13 @@
         android:theme="@style/Theme.Cursova"
         tools:targetApi="31">
         <activity
-            android:name=".activities.EditProfileActivity"
+            android:name=".PresentationLayer.Activities.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".UserProfileActivity"
+            android:name=".PresentationLayer.Activities.HistoryActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.HistoryActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activities.StartPageActivity"
+            android:name=".PresentationLayer.Activities.StartPageActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,13 +33,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainPageActivity"
+            android:name=".PresentationLayer.Activities.MainPageActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SignUpActivity"
+            android:name=".PresentationLayer.Activities.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".PresentationLayer.Activities.LoginActivity"
             android:exported="false"></activity>
 
         <provider

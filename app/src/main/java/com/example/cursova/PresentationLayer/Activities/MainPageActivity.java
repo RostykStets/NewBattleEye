@@ -1,4 +1,4 @@
-package com.example.cursova.activities;
+package com.example.cursova.PresentationLayer.Activities;
 
 
 import android.Manifest;
@@ -28,10 +28,9 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cursova.BusinessLogic;
-import com.example.cursova.DBHelper;
+import com.example.cursova.BusinessLogicLayer.BusinessLogic;
+import com.example.cursova.DataAccessLayer.DBHelper;
 import com.example.cursova.R;
-import com.example.cursova.UserProfileActivity;
 
 import java.io.File;
 
@@ -110,14 +109,6 @@ public class MainPageActivity extends AppCompatActivity implements PopupMenu.OnM
             popupMenu.setOnMenuItemClickListener(MainPageActivity.this);
             popupMenu.inflate(R.menu.settings_menu);
             popupMenu.show();
-        });
-
-        user_email.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainPageActivity.this, UserProfileActivity.class));
-                finish();
-            }
         });
     }
 

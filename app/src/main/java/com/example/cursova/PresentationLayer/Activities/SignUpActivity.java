@@ -1,4 +1,4 @@
-package com.example.cursova.activities;
+package com.example.cursova.PresentationLayer.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cursova.BusinessLogic;
+import com.example.cursova.BusinessLogicLayer.BusinessLogic;
 import com.example.cursova.R;
 
 public class SignUpActivity extends AppCompatActivity {
@@ -20,13 +20,10 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText password;
     private EditText confirm_password;
     private Button signUp;
-
     private CheckBox remember_me;
-
     private TextView loginLink;
-    private BusinessLogic BL;
+    private BusinessLogic businessLogic;
 
-    //DBHelper DB;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +34,11 @@ public class SignUpActivity extends AppCompatActivity {
         password = (EditText) findViewById(R.id.password_input);
         confirm_password = (EditText) findViewById(R.id.confirm_password_input);
 
-        BL = new BusinessLogic(this);
+        businessLogic = new BusinessLogic(this);
 
         signUp = (Button) findViewById(R.id.signUpButton);
 
         remember_me = findViewById(R.id.rememberMeCheckBox);
-
-        //DB = new DBHelper(this);
-        //Toast.makeText(SignUpActivity.this, DB.getDatabasePath(), Toast.LENGTH_LONG).show();
 
         signUp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,32 +57,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                 if(!pass.equals("") && !conf_pass.equals("") && conf_pass.equals(pass))
                 {
-                    BL.signUpUser(login_, pass, rememberMe);
-//                    try {
-//                        if(DB.checkUser(login_, pass) == 0)
-//                        {
-//                            Toast.makeText(SignUpActivity.this, "User already exists!", Toast.LENGTH_SHORT).show();
-//                        }
-//                        else {
-//                            boolean insert = DB.insertUser(login_, pass, rememberMe);
-//
-//                            if (insert) {
-//                                Toast.makeText(SignUpActivity.this, "User registered successfully!", Toast.LENGTH_LONG).show();
-//                                Toast.makeText(SignUpActivity.this, "Session ID: " + DBHelper.sessionId, Toast.LENGTH_LONG).show();
-//                                DB.close();
-//
-//                                Intent intent = new Intent(SignUpActivity.this, MainPageActivity.class);
-//                                startActivity(intent);
-//                                finish();
-//                            }
-////                            else {
-////                                //Toast.makeText(SignUpActivity.this, "Something went wrong!", Toast.LENGTH_LONG).show();
-////                            }
-//                        }
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                        Toast.makeText(SignUpActivity.this, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-//                    }
+                    businessLogic.signUpUser(login_, pass, rememberMe);
                 }
             }
         });

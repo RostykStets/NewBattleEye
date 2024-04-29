@@ -1,4 +1,4 @@
-package com.example.cursova;
+package com.example.cursova.PresentationLayer.Adapters;
 
 import android.content.Context;
 import android.graphics.BitmapFactory;
@@ -9,6 +9,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.cursova.R;
 
 import java.util.ArrayList;
 

@@ -5,15 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Environment;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.example.cursova.activities.EditProfileActivity;
 import com.example.cursova.activities.LoginActivity;
 import com.example.cursova.activities.MainPageActivity;
 import com.example.cursova.activities.StartPageActivity;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class BusinessLogic {
@@ -185,7 +184,6 @@ public class BusinessLogic {
                     ContentValues conVal = new ContentValues();
                     conVal.put("remember_me", (rememberMe == 0) ? 0 : 1);
                     db.update("Users", conVal, "email = ? AND password = ?", new String[] {email, password});
-                    //DBHelper.sessionId = DB.getUserId(email, password);
                     sessionID = this.getUserId(email, password);
                     db.close();
 
@@ -231,7 +229,6 @@ public class BusinessLogic {
             return -1;
         }
     }
-
 
     public void userEmailOnClick(String email)
     {
@@ -287,14 +284,21 @@ public class BusinessLogic {
 
     public boolean menuItems(MenuItem menuItem)
     {
-        if(menuItem.getItemId() == R.id.item1)
+        int selectedItem = menuItem.getItemId();
+
+        if(selectedItem == R.id.item1)
         {
             sessionID = 0;
             user_email = "";
             this.context.startActivity(new Intent(this.context, StartPageActivity.class));
             return true;
         }
-        else if(menuItem.getItemId() == R.id.item2)
+        else if(selectedItem == R.id.item2)
+        {
+            this.context.startActivity(new Intent(this.context, EditProfileActivity.class));
+            return true;
+        }
+        else if(selectedItem == R.id.item3)
         {
 
             int isUserDeleted = this.deleteUser();
@@ -316,5 +320,36 @@ public class BusinessLogic {
         else {
             return false;
         }
+    }
+
+    public int updateUserEmail(String newEmail)
+    {
+        int result = -1;
+        if(newEmail != null && !newEmail.isEmpty()) {
+            boolean isUpdated = DB.updateUserEmail(sessionID, user_email, newEmail);
+            if(isUpdated)
+                result = 0;
+            else
+                result = 1;
+        }
+        return result;
+    }
+
+    public int updateUserPassword(String password, String newPassword)
+    {
+
+        int rightPassword = this.checkUser(user_email, password);
+        if(rightPassword != 0)
+            return -1;
+        int result = -1;
+        if(password.equals(newPassword) && !newPassword.isEmpty()) {
+            boolean isUpdated = DB.updateUserPassword(sessionID, password, newPassword);
+            if(isUpdated)
+                result = 0;
+            else
+                result = 1;
+        }
+
+        return result;
     }
 }

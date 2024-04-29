@@ -120,21 +120,12 @@ public class MainPageActivity extends AppCompatActivity implements PopupMenu.OnM
         {
             Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
             try {
-                DBHelper DB = new DBHelper(this);
 
-                SQLiteDatabase db = DB.getWritableDatabase();
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("fk_user_id", BusinessLogic.sessionID);
-                contentValues.put("imgref", currentPhotoPath);
-                db.insert("Images", null, contentValues);
-                Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM Images WHERE fk_user_id = ?", new String[] {String.valueOf(BusinessLogic.sessionID)});
-                if(cursor.moveToFirst())
-                {
-                    int count = cursor.getInt(0);
-                    Toast.makeText(MainPageActivity.this, "Count of images: " + count, Toast.LENGTH_SHORT).show();
-                }
-                cursor.close();
-                DB.close();
+                this.businessLogic.insertImage(BusinessLogic.sessionID, currentPhotoPath);
+
+                int imageCount = this.businessLogic.getImageCount(BusinessLogic.sessionID);
+
+                Toast.makeText(MainPageActivity.this, "Count of images: " + imageCount, Toast.LENGTH_SHORT).show();
 
             }catch (Exception e)
             {

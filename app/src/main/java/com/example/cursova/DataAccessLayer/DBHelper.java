@@ -185,6 +185,29 @@ public class DBHelper extends SQLiteOpenHelper {
         return id;
     }
 
+    public void insertImageDb(int userId, String imagePath)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("fk_user_id", userId);
+        contentValues.put("imgref", imagePath);
+        db.insert("Images", null, contentValues);
+    }
+
+    public int getImageCount(int userId)
+    {
+        int count = 0;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM Images WHERE fk_user_id = ?", new String[] {String.valueOf(userId)});
+        if(cursor.moveToFirst())
+        {
+            count = cursor.getInt(0);
+        }
+        cursor.close();
+
+        return count;
+    }
+
     public ArrayList<String> getUsersDb()
     {
         SQLiteDatabase db = this.getReadableDatabase();

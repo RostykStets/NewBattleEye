@@ -146,6 +146,16 @@ public class BusinessLogic {
         }
     }
 
+    public void insertImage(int userId, String imagePath)
+    {
+        this.DB.insertImageDb(userId, imagePath);
+    }
+
+    public int getImageCount(int userId)
+    {
+        return this.DB.getImageCount(userId);
+    }
+
     public ArrayList<String> getImagePaths()
     {
         return DB.getImagePathsDb(sessionID);

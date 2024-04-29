@@ -16,4 +16,6 @@
     <string name="deleteAccount">Видалити акаунт</string>
     <string name="user">Користувач</string>
     <string name="editProfile">Редагувати профіль</string>
+    <string name="newEmailHint">Новий email</string>
+    <string name="newPasswordHint">Новий пароль</string>
 </resources>

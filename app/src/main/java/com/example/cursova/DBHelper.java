@@ -1,5 +1,6 @@
 package com.example.cursova;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -8,8 +9,6 @@ import java.io.File;
 
 public class DBHelper extends SQLiteOpenHelper {
 
-    public static int sessionId = 0;
-    public static String user_email = "";
     private final Context context;
     public DBHelper(Context context){
         super(context, "Cursova", null, 1);
@@ -24,8 +23,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase DB, int i, int i1) {
-        DB.execSQL("DROP TABLE IF EXISTS Users");
         DB.execSQL("DROP TABLE IF EXISTS Images");
+        DB.execSQL("DROP TABLE IF EXISTS Users");
     }
 
     public String getDatabasePath() {
@@ -35,6 +34,24 @@ public class DBHelper extends SQLiteOpenHelper {
     public File getDataBaseFile()
     {
         return context.getDatabasePath("Cursova").getAbsoluteFile();
+    }
+
+    public boolean updateUserEmail(int id, String email, String newEmail)
+    {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues conVal = new ContentValues();
+        if (newEmail != null) conVal.put("email", newEmail);
+        int rowsAffected = DB.update("Users", conVal, "email = ? AND id = ?", new String[] {email, String.valueOf(id)});
+        return rowsAffected > 0;
+    }
+
+    public boolean updateUserPassword(int id, String password, String newPassword)
+    {
+        SQLiteDatabase DB = this.getWritableDatabase();
+        ContentValues conVal = new ContentValues();
+        conVal.put("password", newPassword);
+        int rowsAffected = DB.update("Users", conVal, "password = ? AND id = ?", new String[] {password, String.valueOf(id)});
+        return rowsAffected > 0;
     }
 
 //    public int checkUser(String email, String password)

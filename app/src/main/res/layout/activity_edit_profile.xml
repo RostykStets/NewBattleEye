@@ -58,15 +58,81 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
-    <TextView
+    <EditText
+        android:id="@+id/newEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="300dp"
+        android:background="@drawable/rounded_corner"
+        android:hint="@string/newEmailHint"
+        android:textColorHint="@color/white"
+        android:inputType="text"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/password_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginTop="365dp"
+        android:background="@drawable/rounded_corner"
+        android:hint="@string/password_hint"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:padding="20dp"
+        android:textColorHint="@color/white" />
+
+    <EditText
+        android:id="@+id/new_password_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginTop="430dp"
+        android:background="@drawable/rounded_corner"
+        android:hint="@string/newPasswordHint"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:padding="20dp"
+        android:textColorHint="@color/white" />
+
+    <Button
+        android:id="@+id/changeEmailBtn"
         android:layout_width="200dp"
         android:layout_height="50dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:text="@string/user"
-        android:textSize="30sp"
+        android:layout_marginStart="105dp"
+        android:layout_marginBottom="140dp"
+        android:background="@drawable/loginbuttonbg"
+        android:text="Змінити email"
         android:textColor="@color/white"
-        android:layout_marginBottom="435dp" />
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/changePasswordBtn"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="105dp"
+        android:layout_marginBottom="91dp"
+        android:background="@drawable/loginbuttonbg"
+        android:text="Змінити пароль"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

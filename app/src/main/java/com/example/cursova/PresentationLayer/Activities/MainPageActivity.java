@@ -8,11 +8,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -29,7 +26,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cursova.BusinessLogicLayer.BusinessLogic;
-import com.example.cursova.DataAccessLayer.DBHelper;
 import com.example.cursova.R;
 
 import java.io.File;

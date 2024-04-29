@@ -7,17 +7,17 @@
     android:background="@drawable/login_bg"
     tools:context=".activities.MainPageActivity">
 
-    <ImageView
-        android:id="@+id/trident_icon"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="130dp"
-        android:layout_marginTop="60dp"
-        android:importantForAccessibility="no"
-        android:src="@drawable/icon_account_circle" />
+<!--    <ImageView-->
+<!--        android:id="@+id/trident_icon"-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="150dp"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentTop="true"-->
+<!--        android:layout_centerHorizontal="true"-->
+<!--        android:layout_marginStart="130dp"-->
+<!--        android:layout_marginTop="60dp"-->
+<!--        android:importantForAccessibility="no"-->
+<!--        android:src="@drawable/icon_account_circle" />-->
 
     <ImageView
         android:id="@+id/user_icon"
@@ -70,14 +70,15 @@
         tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     <TextView
-        android:layout_width="200dp"
+        android:id="@+id/userLabel"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="435dp"
         android:text="@string/user"
-        android:textSize="30sp"
         android:textColor="@color/white"
-        android:layout_marginBottom="435dp" />
+        android:textSize="30sp" />
 
     <Button
         android:id="@+id/editProfileBtn"

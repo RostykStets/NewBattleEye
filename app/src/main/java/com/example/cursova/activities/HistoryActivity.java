@@ -12,7 +12,6 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.cursova.BusinessLogic;
 import com.example.cursova.ImgAdapter;
@@ -23,7 +22,7 @@ import java.util.ArrayList;
 
 public class HistoryActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{
 
-    private TextView user_email;
+    private TextView userEmail;
     Button back_to_main;
 
     ImageButton settings;
@@ -35,11 +34,11 @@ public class HistoryActivity extends AppCompatActivity implements PopupMenu.OnMe
         setContentView(R.layout.activity_history);
 
         back_to_main = findViewById(R.id.back_to_main);
-        user_email = findViewById(R.id.user);
+        userEmail = findViewById(R.id.user);
         businessLogic = new BusinessLogic(this);
         settings = findViewById(R.id.settings);
 
-        user_email.setText(BusinessLogic.user_email);
+        userEmail.setText(BusinessLogic.user_email);
 
         ArrayList<String> imgPaths = businessLogic.getImagePaths();
 
@@ -59,7 +58,7 @@ public class HistoryActivity extends AppCompatActivity implements PopupMenu.OnMe
             popupMenu.show();
         });
 
-        user_email.setOnClickListener(new View.OnClickListener() {
+        userEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(HistoryActivity.this, UserProfileActivity.class));

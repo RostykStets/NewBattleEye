@@ -1,4 +1,4 @@
-package com.example.cursova.activities;
+package com.example.cursova.PresentationLayer.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,8 +9,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.cursova.BusinessLogic;
-import com.example.cursova.MyAdapter;
+import com.example.cursova.BusinessLogicLayer.BusinessLogic;
+import com.example.cursova.PresentationLayer.Adapters.MyAdapter;
 import com.example.cursova.R;
 
 import java.util.ArrayList;

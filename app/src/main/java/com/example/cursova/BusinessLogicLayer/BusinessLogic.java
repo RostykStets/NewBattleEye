@@ -1,18 +1,16 @@
-package com.example.cursova;
+package com.example.cursova.BusinessLogicLayer;
 
-//import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
-//import android.database.Cursor;
-//import android.database.sqlite.SQLiteDatabase;
-//import android.os.Environment;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.cursova.activities.EditProfileActivity;
-import com.example.cursova.activities.LoginActivity;
-import com.example.cursova.activities.MainPageActivity;
-import com.example.cursova.activities.StartPageActivity;
+import com.example.cursova.DataAccessLayer.DBHelper;
+import com.example.cursova.PresentationLayer.Activities.EditProfileActivity;
+import com.example.cursova.PresentationLayer.Activities.LoginActivity;
+import com.example.cursova.PresentationLayer.Activities.MainPageActivity;
+import com.example.cursova.PresentationLayer.Activities.StartPageActivity;
+import com.example.cursova.R;
 
 import java.util.ArrayList;
 
@@ -32,123 +30,23 @@ public class BusinessLogic {
         }
     }
 
-    /*public int checkUser(String email, String password)
-    {
-        SQLiteDatabase db = this.DB.getWritableDatabase();
-        int result;
-        Cursor cursor = db.rawQuery("SELECT * FROM Users WHERE email = ? AND password = ?",
-                new String[] {email, password});
-        if(cursor.getCount() > 0) {
-            result = 0;
-        }
-        else
-        {
-            cursor = db.rawQuery("SELECT * FROM Users WHERE email = ?",
-                    new String[] {email});
-            if (cursor.getCount() > 0) {
-                result = 1;
-            }
-            else {
-                cursor = db.rawQuery("SELECT * FROM Users WHERE password = ?",
-                        new String[] {password}); // Daamn
-                if(cursor.getCount() > 0) {
-                    result = 2;
-                }
-                else {
-                    result = 3;
-                }
-            }
-        }
-        cursor.close();
-        db.close();
-        return result;
-    }*/
-
-    /*public int getUserId(String email, String password) {
-        int id = 0;
-        SQLiteDatabase db = this.DB.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT id FROM Users WHERE email = ? AND password = ?",
-                new String[] {email, password});
-        if(cursor.moveToNext()) {
-            id = Integer.parseInt(cursor.getString(0));
-            db.close();
-            cursor.close();
-        }
-        return id;
-    }*/
-
-    /*public boolean insertUser(String email, String password, int remember_me)
-    {
-        try{
-            SQLiteDatabase db = this.DB.getWritableDatabase();
-            ContentValues contentValues = new ContentValues();
-            contentValues.put("email", email);
-            contentValues.put("password", password);
-            contentValues.put("remember_me", (remember_me == 0) ? 0 : 1);
-            long result = db.insert("Users", null, contentValues);
-            Cursor cursor = db.rawQuery("SELECT id FROM Users WHERE email = ? AND password = ?",
-                    new String[] {email, password});
-            if(cursor.moveToNext())
-            {
-                sessionID = Integer.parseInt(cursor.getString(0));
-            }
-            cursor.close();
-            db.close();
-            return result != -1;
-        }
-        catch (Exception e)
-        {
-            e.getStackTrace();
-            Toast.makeText(this.context, "Error: " + e.getMessage(), Toast.LENGTH_LONG).show();
-            return false;
-        }
-    }*/
-
     public ArrayList<String> getUsers()
     {
         return DB.getUsersDb();
     }
 
-    /*public int isUserRemembered(String user_email)
-    {
-        SQLiteDatabase db = this.DB.getReadableDatabase();
-        int isRemembered = -1;
-        if(DB != null)
-        {
-            try{
-                Cursor cursor = db.rawQuery("SELECT remember_me FROM Users WHERE email = ?",
-                        new String[]{user_email});
-                if (cursor.moveToNext()) {
-                    isRemembered = Integer.parseInt(cursor.getString(0));
-                    db.close();
-                    cursor.close();
-                }
-            }catch (Exception e)
-            {
-                e.getStackTrace();
-                Toast.makeText(this.context, "Error: " + e.getMessage(),Toast.LENGTH_LONG)
-                        .show();
-            }
-        }
-        return isRemembered;
-    }*/
-
     public void signUpUser(String email, String password, int rememberMe)
     {
         try {
-            //DBHelper DB = new DBHelper(this.context);
             if(DB.checkUserDb(email, password) < 2)
-            //if(this.checkUser(email, password) == 0)
             {
                 Toast.makeText(this.context, "User already exists!", Toast.LENGTH_SHORT)
                         .show();
             }
             else {
                 int insert = DB.insertUserDb(email, password, rememberMe);
-                //boolean insert = this.insertUser(email, password, rememberMe);
 
                 if (-1 != insert) {
-                    //sessionID = DB.getUserId(email, password);
                     sessionID = insert;
                     user_email = email;
                     Toast.makeText(this.context, "User registered successfully!",
@@ -170,7 +68,6 @@ public class BusinessLogic {
     {
         try {
             int user_check = DB.checkUserDb(email, password);
-            //int user_check = this.checkUser(email, password);
 
             switch (user_check)
             {
@@ -220,28 +117,9 @@ public class BusinessLogic {
         }
     }
 
-    /*public int deleteUser()
-    {
-        try {
-            SQLiteDatabase db = this.DB.getWritableDatabase();
-            int deletedRow = db.delete("Users", "id = ? AND email = ?",
-                    new String[] {String.valueOf(sessionID), user_email});
-            if(deletedRow > 0)
-                return 0;
-            else
-                return 1;
-        }catch (Exception e)
-        {
-            e.getStackTrace();
-            Toast.makeText(this.context, "Error: " + e, Toast.LENGTH_LONG).show();
-            return -1;
-        }
-    }*/
-
     public void userEmailOnClick(String email)
     {
         try {
-            //int isUserRemembered = new DBHelper(this.context).isUserRemembered(email);
             int isUserRemembered = DB.isUserRememberedDb(email);
             user_email = email;
             if (isUserRemembered == 0){
@@ -266,6 +144,16 @@ public class BusinessLogic {
             Toast.makeText(this.context, "Error: " + e.getMessage(),
                     Toast.LENGTH_LONG).show();
         }
+    }
+
+    public void insertImage(int userId, String imagePath)
+    {
+        this.DB.insertImageDb(userId, imagePath);
+    }
+
+    public int getImageCount(int userId)
+    {
+        return this.DB.getImageCount(userId);
     }
 
     public ArrayList<String> getImagePaths()
@@ -328,7 +216,7 @@ public class BusinessLogic {
     public int updateUserPassword(String password, String newPassword)
     {
 
-        int rightPassword = this.checkUser(user_email, password);
+        int rightPassword = DB.checkUserDb(user_email, password);
         if(rightPassword != 0)
             return -1;
         int result = -1;

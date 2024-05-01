@@ -1,4 +1,4 @@
-package com.example.cursova.activities;
+package com.example.cursova.PresentationLayer.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -7,16 +7,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.example.cursova.BusinessLogic;
-import com.example.cursova.ImgAdapter;
+import com.example.cursova.BusinessLogicLayer.BusinessLogic;
+import com.example.cursova.PresentationLayer.Adapters.ImgAdapter;
 import com.example.cursova.R;
-import com.example.cursova.UserProfileActivity;
 
 import java.util.ArrayList;
 
@@ -58,13 +56,6 @@ public class HistoryActivity extends AppCompatActivity implements PopupMenu.OnMe
             popupMenu.show();
         });
 
-        userEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(HistoryActivity.this, UserProfileActivity.class));
-                finish();
-            }
-        });
     }
 
     @Override

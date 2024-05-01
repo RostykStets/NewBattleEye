@@ -1,4 +1,4 @@
-package com.example.cursova.activities;
+package com.example.cursova.PresentationLayer.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,7 +11,7 @@ import android.widget.ImageButton;
 import android.widget.PopupMenu;
 import android.widget.TextView;
 
-import com.example.cursova.BusinessLogic;
+import com.example.cursova.BusinessLogicLayer.BusinessLogic;
 import com.example.cursova.R;
 
 public class EditProfileActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener{

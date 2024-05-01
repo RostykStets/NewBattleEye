@@ -1,4 +1,4 @@
-package com.example.cursova.activities;
+package com.example.cursova.PresentationLayer.Activities;
 
 
 import android.Manifest;
@@ -8,11 +8,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -28,10 +25,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.cursova.BusinessLogic;
-import com.example.cursova.DBHelper;
+import com.example.cursova.BusinessLogicLayer.BusinessLogic;
 import com.example.cursova.R;
-import com.example.cursova.UserProfileActivity;
 
 import java.io.File;
 
@@ -111,14 +106,6 @@ public class MainPageActivity extends AppCompatActivity implements PopupMenu.OnM
             popupMenu.inflate(R.menu.settings_menu);
             popupMenu.show();
         });
-
-        user_email.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(MainPageActivity.this, UserProfileActivity.class));
-                finish();
-            }
-        });
     }
 
     @Override
@@ -129,21 +116,12 @@ public class MainPageActivity extends AppCompatActivity implements PopupMenu.OnM
         {
             Bitmap bitmap = BitmapFactory.decodeFile(currentPhotoPath);
             try {
-                DBHelper DB = new DBHelper(this);
 
-                SQLiteDatabase db = DB.getWritableDatabase();
-                ContentValues contentValues = new ContentValues();
-                contentValues.put("fk_user_id", BusinessLogic.sessionID);
-                contentValues.put("imgref", currentPhotoPath);
-                db.insert("Images", null, contentValues);
-                Cursor cursor = db.rawQuery("SELECT COUNT(*) FROM Images WHERE fk_user_id = ?", new String[] {String.valueOf(BusinessLogic.sessionID)});
-                if(cursor.moveToFirst())
-                {
-                    int count = cursor.getInt(0);
-                    Toast.makeText(MainPageActivity.this, "Count of images: " + count, Toast.LENGTH_SHORT).show();
-                }
-                cursor.close();
-                DB.close();
+                this.businessLogic.insertImage(BusinessLogic.sessionID, currentPhotoPath);
+
+                int imageCount = this.businessLogic.getImageCount(BusinessLogic.sessionID);
+
+                Toast.makeText(MainPageActivity.this, "Count of images: " + imageCount, Toast.LENGTH_SHORT).show();
 
             }catch (Exception e)
             {

@@ -205,8 +205,10 @@ public class BusinessLogic {
         int result = -1;
         if(newEmail != null && !newEmail.isEmpty()) {
             boolean isUpdated = DB.updateUserEmail(sessionID, user_email, newEmail);
-            if(isUpdated)
+            if(isUpdated) {
                 result = 0;
+                user_email = newEmail;
+            }
             else
                 result = 1;
         }
